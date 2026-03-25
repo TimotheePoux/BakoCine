@@ -34,14 +34,28 @@ header{
     nav{
         font-size: 1.5em;
         margin: auto;
-        margin-right: 2%;
+        margin-right: 4%;
         display: flex;
         flex-direction: row;
         p{
-            margin:3%;
+            margin:5%;
+            font-weight: bolder;
         }
         p:hover{
             text-decoration: underline;
         }
     }
+}
+
+#search{
+    padding-top: 10%;
+    padding-bottom: 10%;
+    display: flex;
+    background-color: #ffff;
+    justify-content: center;
+    
+}
+
+@media screen and (max-width:768px){
+
 }
