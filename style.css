@@ -1,7 +1,7 @@
 :root{
-    --white: #e7e7e7;
+    --white: #ffffff;
     --color: #032541;
-    --search: #dddddd;
+    --gray: #e7e7e7;
     font-family: "Roboto";
 }
 
@@ -17,13 +17,14 @@ header{
     justify-content: space-between;
     color: var(--white);
     div{
+        margin: 0.5% 0 0.5% 0;
         font-size: 2em;
         display: flex;
         h1{
-            margin: 2%;
+            margin: auto;
         }
         svg{
-            width:4em;
+            width:3.5em;
             padding-right: 5%;
         }
     }
@@ -39,20 +40,42 @@ header{
         p:hover{
             text-decoration: underline;
         }
+        svg{
+            display: none;
+            fill: var(--white);
+            width: 3em;
+        }
+        ul{
+            display: none;
+            background-color: var(--color);
+            padding: 0;
+            text-align: center;
+            list-style-type: none;
+            position: absolute;
+            right: 0.4%;
+            top: 8%;
+            z-index: 1;
+            padding: 1%;
+            animation-direction: normal;
+            li{
+                position: relative;
+                padding: 0.5%;
+            }
+        }
     }
 }
 
 #search{
-    padding: 12% 0 12% 0;
+    padding: 11% 0 11% 0;
     display: flex;
     justify-content: center;
     background-size:100%;
     background-position-y: center;
     opacity: 0.7;
     div{
-        border: solid, var(--search);
+        border: solid, var(--gray);
         padding: 0.5%;
-        background-color: var(--search);
+        background-color: var(--gray);
         border-radius: 15px;
         width: 75%;
         height: 2em;
@@ -64,12 +87,12 @@ header{
             font-size: 1.7em;
             width: 100%;
             margin-left: 0.2%;
-            border: var(--search);
+            border: 0;
         }
         button{
             transition: transform 100ms cubic-bezier(0.075, 0.82, 0.165, 1);
             background: none;
-            border: var(--search);
+            border: var(--gray);
             svg{
                 fill: var(--color);
                 width: 2em;
@@ -91,5 +114,48 @@ header{
 }
 
 @media screen and (max-width:768px){
+    header{
+        nav{
+            p{
+                display: none;
+            }
+            svg{
+                display: inline;
+            }
+            svg:hover ul{
+                display: block;
+            }
+        }
+        nav:hover ul{
+            display: block;
+        }
+    }
+}
 
+@media screen and (max-width:426px){
+    header{
+        div{
+            font-size: 1.2em;
+        }
+        nav{
+            font-size: 1em;
+            ul{
+                top:5%;
+                right: 0%;
+            }
+        }
+    }
+    #search>div>input{
+            font-size: 1.2em;
+        }
+}
+
+@media screen and (max-width:320px){
+    header>div{
+        font-size: 1em;
+    }
+    #search{
+        padding: 6% 0 6% 0;
+    
+    }
 }
