@@ -11,36 +11,29 @@ body{
 }
 
 header{
-    padding-left:4%;
-    padding-right: 4%;
+    padding: 0 4% 0 4%;
     background-color: var(--color);
-    text-align: center;
     display: flex;
-    flex-direction: row;
+    justify-content: space-between;
     color: var(--white);
-    justify-content:space-between;
     div{
         font-size: 2em;
         display: flex;
-        flex-direction: row;
         h1{
             margin: 2%;
         }
         svg{
             width:4em;
-            height:auto;
             padding-right: 5%;
-            fill: var(--white);
         }
     }
     nav{
         font-size: 1.5em;
-        margin: auto;
-        margin-right: 4%;
+        margin: auto 0 auto 0;
         display: flex;
-        flex-direction: row;
+        justify-content: right;
         p{
-            margin:5%;
+            margin-left:10%;
             font-weight: bolder;
         }
         p:hover{
@@ -63,12 +56,11 @@ header{
         border-radius: 15px;
         width: 50%;
         display: flex;
-        justify-content: center;
         transition: border 500ms linear;
         input{
             outline: none;
             background: none;
-            width: 999%;;
+            width: 100%;
             border: var(--search);
         }
         button{
