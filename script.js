@@ -1,3 +1,5 @@
+const apiLink = 'https://api.themoviedb.org/3/movie/popular';
+
 const options = {
   method: 'GET',
   headers: {
@@ -6,7 +8,10 @@ const options = {
   }
 };
 
-const data = await fetch('https://api.themoviedb.org/3/configuration', options)
+const data = await fetch(apiLink, options)
   .then(res => res.json())
   .catch(err => console.error(err));
 console.log('Données récupérées :', data); //vérifie que les donnés sont bien récupérées
+
+let search = document.querySelector('#search');
+search.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${data.results[0].backdrop_path})`;
