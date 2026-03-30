@@ -129,7 +129,6 @@ section{
         }
         button{
             margin: auto 0 auto 2%;
-            height: 1%;
             width: 10%;
             height: 2.5em;
             font-size: 1em;
@@ -147,10 +146,12 @@ section{
         justify-content: space-around;
         margin:2% 0 2% 0;
         article{
+            position: relative;
             width: 15%;
             .poster{
                 width: 100%;
                 transition: 0.3s;
+                box-shadow: 2px 2px 2px rgb(0 0 0 / 0.2);;
             }
             .poster:hover{
                 box-shadow: 7px 7px 2px rgb(0 0 0 / 0.4);
@@ -159,9 +160,28 @@ section{
                 color: var(--color);
                 font-weight: bold;
                 margin: 2% 0 0 0;
+                text-shadow: 2px 2px 2px rgb(0 0 0 / 0.2);
             }
             .movieDate{
                 margin: 0;
+                text-shadow: 2px 2px 2px rgb(0 0 0 / 0.2);
+            }
+            div{
+                position: absolute;
+                right: -11%;
+                top: 82%;
+                height: 2.7em;
+                width: 2.7em;
+                display: flex;
+                justify-content: center;
+                background-color: var(--color);
+                color: var(--white);
+                border-radius: 100%;
+                border: var(--white) solid 3px;
+                box-shadow: 2px 2px 2px rgb(0 0 0 / 0.2);
+                .movieNote{
+                    margin: auto 0 auto 0;
+                }
             }
         }
     }

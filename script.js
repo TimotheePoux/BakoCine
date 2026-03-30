@@ -22,3 +22,5 @@ let title = document.querySelector('.movieTitle');
 title.innerHTML = data.results[0].title;
 let date = document.querySelector('.movieDate');
 date.innerHTML = data.results[0].release_date;
+let note = document.querySelector('.movieNote');
+note.innerHTML = `${data.results[0].vote_average*10}%`;
