@@ -5,6 +5,10 @@
     font-family: "Roboto";
 }
 
+button{
+    font-family: "Roboto";
+}
+
 body{
     background-color: var(--white);
     margin: 0;
@@ -119,6 +123,7 @@ section{
         margin-left: 5%;
         margin-top: 2%;
         h2{
+            color: var(--color);
             font-size: 2.5em;
             margin: 0;
         }
@@ -126,9 +131,15 @@ section{
             margin: auto 0 auto 2%;
             height: 1%;
             width: 10%;
-            height: 3em;
+            height: 2.5em;
+            font-size: 1em;
             background-color: var(--white);
             border: var(--color) solid 3px;
+            color: var(--color);
+            transition: 0.3s;
+        }
+        button:hover{
+            transform: scale(1.1);
         }
     }
     .list{
@@ -139,11 +150,15 @@ section{
             width: 15%;
             .poster{
                 width: 100%;
+                transition: 0.3s;
+            }
+            .poster:hover{
+                box-shadow: 7px 7px 2px rgb(0 0 0 / 0.4);
             }
             .movieTitle{
                 color: var(--color);
                 font-weight: bold;
-                margin: 0;
+                margin: 2% 0 0 0;
             }
             .movieDate{
                 margin: 0;
