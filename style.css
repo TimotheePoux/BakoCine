@@ -113,6 +113,45 @@ header{
     
 }
 
+section{
+    .titleList{
+        display: flex;
+        margin-left: 5%;
+        margin-top: 2%;
+        h2{
+            font-size: 2.5em;
+            margin: 0;
+        }
+        button{
+            margin: auto 0 auto 2%;
+            height: 1%;
+            width: 10%;
+            height: 3em;
+            background-color: var(--white);
+            border: var(--color) solid 3px;
+        }
+    }
+    .list{
+        display: flex;
+        justify-content: space-around;
+        margin:2% 0 2% 0;
+        article{
+            width: 15%;
+            .poster{
+                width: 100%;
+            }
+            .movieTitle{
+                color: var(--color);
+                font-weight: bold;
+                margin: 0;
+            }
+            .movieDate{
+                margin: 0;
+            }
+        }
+    }
+}
+
 @media screen and (max-width:768px){
     header{
         nav{
@@ -156,6 +195,8 @@ header{
     }
     #search{
         padding: 6% 0 6% 0;
-    
+        div>input{
+            margin-left: 1%;
+        }
     }
 }
