@@ -129,7 +129,7 @@ section{
         }
         button{
             margin: auto 0 auto 2%;
-            width: 10%;
+            width: 15%;
             height: 2.5em;
             font-size: 1em;
             background-color: var(--white);
@@ -146,30 +146,21 @@ section{
         justify-content: space-around;
         margin:2% 0 2% 0;
         article{
-            position: relative;
             width: 15%;
-            .poster{
-                width: 100%;
-                transition: 0.3s;
-                box-shadow: 2px 2px 2px rgb(0 0 0 / 0.2);;
-            }
-            .poster:hover{
-                box-shadow: 7px 7px 2px rgb(0 0 0 / 0.4);
-            }
-            .movieTitle{
-                color: var(--color);
-                font-weight: bold;
-                margin: 2% 0 0 0;
-                text-shadow: 2px 2px 2px rgb(0 0 0 / 0.2);
-            }
-            .movieDate{
-                margin: 0;
-                text-shadow: 2px 2px 2px rgb(0 0 0 / 0.2);
-            }
             div{
+                position: relative;
+                .poster{
+                    width: 100%;
+                    transition: 0.3s;
+                    box-shadow: 2px 2px 2px rgb(0 0 0 / 0.2);
+                }
+                .poster:hover{
+                    box-shadow: 7px 7px 2px rgb(0 0 0 / 0.4);
+                }
+                div{
                 position: absolute;
-                right: -11%;
-                top: 82%;
+                right: -10%;
+                bottom: -6%;
                 height: 2.7em;
                 width: 2.7em;
                 display: flex;
@@ -182,6 +173,18 @@ section{
                 .movieNote{
                     margin: auto 0 auto 0;
                 }
+            }
+            }
+
+            .movieTitle{
+                color: var(--color);
+                font-weight: bold;
+                margin: 2% 0 0 0;
+                text-shadow: 2px 2px 2px rgb(0 0 0 / 0.2);
+            }
+            .movieDate{
+                margin: 0;
+                text-shadow: 2px 2px 2px rgb(0 0 0 / 0.2);
             }
         }
     }
@@ -204,6 +207,22 @@ section{
             display: block;
         }
     }
+    section{
+        .titleList{
+            justify-content: center;
+            button{
+                width: 20%;
+            }
+        }
+        .list{
+            display: grid;
+            grid-template-areas: 'article article';
+            article{
+                width: 65%;
+                margin: 0 auto 5% auto;
+            }
+        }
+    }
 }
 
 @media screen and (max-width:426px){
@@ -222,6 +241,27 @@ section{
     #search>div>input{
             font-size: 1.2em;
         }
+    section{
+        .titleList{
+            flex-direction: column;
+            margin-left: 0;
+            h2{
+                text-align: center;
+            }
+            button{
+                margin: 1% auto 1% auto;
+                justify-content: center;
+                width: 40%;
+            }
+        }
+        .list{
+            display: flex;
+            flex-direction: column;
+            article>div>div{
+                bottom: -4%;
+            }
+        }
+    }
 }
 
 @media screen and (max-width:320px){
