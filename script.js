@@ -1,4 +1,5 @@
-const apiLink = 'https://api.themoviedb.org/3/movie/popular';
+const apiPopulars = 'https://api.themoviedb.org/3/movie/popular';
+let tendances = document.querySelector('#tendances');
 
 const options = {
   method: 'GET',
@@ -8,13 +9,14 @@ const options = {
   }
 };
 
-const data = await fetch(apiLink, options)
+fillMoviesList('https://api.themoviedb.org/3/movie/popular', tendances);
+
+const populars = await fetch(apiPopulars, options)
   .then(res => res.json())
   .catch(err => console.error(err));
-console.log('Données récupérées :', data); //vérifie que les donnés sont bien récupérées
 
 let search = document.querySelector('#search');
-search.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${data.results[0].backdrop_path})`;
+search.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${populars.results[0].backdrop_path})`;
 
 function numberToMonth(nb){
   switch (nb) {
@@ -48,17 +50,22 @@ function numberToMonth(nb){
 }
 
 function prettyDate(date){
-  let newDate = `${date.slice(8,10)} ${numberToMonth(date.slice(5,7))} ${date.slice(0,4)}`;
-  return newDate;
+  return `${date.slice(8,10)} ${numberToMonth(date.slice(5,7))} ${date.slice(0,4)}`;
 }
 
-let poster = document.querySelectorAll('img');
-let title = document.querySelectorAll('.movieTitle');
-let date = document.querySelectorAll('.movieDate');
-let note = document.querySelectorAll('.movieNote');
-for (let i = 0; i<4; i++){
-poster[i].src = `https://image.tmdb.org/t/p/original${data.results[i].poster_path}`;
-title[i].innerHTML = data.results[i].title;
-date[i].innerHTML = prettyDate(data.results[i].release_date);
-note[i].innerHTML = `${Math.round(data.results[i].vote_average*10)}%`;
+async function fillMoviesList(apiLink, section){
+  const data = await fetch(apiLink, options)
+  .then(res => res.json())
+  .catch(err => console.error(err));
+
+  let poster = section.querySelectorAll('img');
+  let title = section.querySelectorAll('.movieTitle');
+  let date = section.querySelectorAll('.movieDate');
+  let note = section.querySelectorAll('.movieNote');
+  for (let i = 0; i<4; i++){
+  poster[i].src = `https://image.tmdb.org/t/p/original${data.results[i].poster_path}`;
+  title[i].innerHTML = data.results[i].title;
+  date[i].innerHTML = prettyDate(data.results[i].release_date);
+  note[i].innerHTML = `${Math.round(data.results[i].vote_average*10)}%`;
+  }
 }
