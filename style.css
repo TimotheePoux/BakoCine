@@ -51,18 +51,21 @@ header{
             width: 3em;
         }
         ul{
-            display: none;
             background-color: var(--color);
             text-align: center;
             list-style-type: none;
             position: absolute;
-            right: -40%;
-            top: 60%;
+            right: 100%;
+            top: 10%;
             z-index: 1;
-            padding: 1% 10% 1% 10%;
-            animation-direction: normal;
+            padding: 5% 10% 5% 10%;
+            border-radius: 10px;
+            box-shadow: 5px 5px 10px rgb(0 0 0 / 0.4);
+            margin: 0;
+            transition: 100ms;
+            opacity: 0;
             li{
-                margin: 5% 0 5% 0;
+                margin: 7% 0% 7% 0%;
             }
         }
     }
@@ -198,12 +201,9 @@ section{
             svg{
                 display: inline;
             }
-            svg:hover ul{
-                display: block;
-            }
         }
         nav:hover ul{
-            display: block;
+            opacity: 1;
         }
     }
     section{
@@ -231,9 +231,6 @@ section{
         }
         nav{
             font-size: 1em;
-            ul{
-                right: -35%;
-            }
         }
     }
     #search>div>input{
@@ -263,19 +260,10 @@ section{
     }
 }
 
-@media screen and (max-width:376px){
-    header>nav>ul{
-        right: -31%;
-    }
-}
-
 @media screen and (max-width:320px){
     header{
         div{
             font-size: 1em;
-        }
-        nav>ul{
-            right: -27%;
         }
     }
     #search{
