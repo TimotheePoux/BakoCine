@@ -16,11 +16,13 @@ console.log('Données récupérées :', data); //vérifie que les donnés sont b
 let search = document.querySelector('#search');
 search.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${data.results[0].backdrop_path})`;
 
-let poster = document.querySelector('img');
-poster.src = `https://image.tmdb.org/t/p/original${data.results[0].poster_path}`;
-let title = document.querySelector('.movieTitle');
-title.innerHTML = data.results[0].title;
-let date = document.querySelector('.movieDate');
-date.innerHTML = data.results[0].release_date;
-let note = document.querySelector('.movieNote');
-note.innerHTML = `${Math.round(data.results[0].vote_average*10)}%`;
+let poster = document.querySelectorAll('img');
+let title = document.querySelectorAll('.movieTitle');
+let date = document.querySelectorAll('.movieDate');
+let note = document.querySelectorAll('.movieNote');
+for (let i = 0; i<4; i++){
+poster[i].src = `https://image.tmdb.org/t/p/original${data.results[i].poster_path}`;
+title[i].innerHTML = data.results[i].title;
+date[i].innerHTML = data.results[i].release_date;
+note[i].innerHTML = `${Math.round(data.results[i].vote_average*10)}%`;
+}
