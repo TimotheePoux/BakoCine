@@ -1,7 +1,27 @@
 const apiPopulars = 'https://api.themoviedb.org/3/movie/popular';
 const apiTrendingsDay = 'https://api.themoviedb.org/3/trending/all/day';
 const apiTrendingsWeek = 'https://api.themoviedb.org/3/trending/all/week';
+const white = "#ffffff"
+const color = "#032541"
 let tendances = document.querySelector('#tendances');
+let buttonsTendances = tendances.querySelectorAll('button');
+
+buttonsTendances[0].style.color = white;
+buttonsTendances[0].style.backgroundColor = color;
+buttonsTendances[0].addEventListener('click', ()=>{
+  buttonsTendances[0].style.color = white;
+  buttonsTendances[0].style.backgroundColor = color;
+  buttonsTendances[1].style.color = color;
+  buttonsTendances[1].style.backgroundColor = white;
+  fillMoviesList(apiTrendingsDay, tendances);
+});
+buttonsTendances[1].addEventListener('click', ()=>{
+  buttonsTendances[1].style.color = white;
+  buttonsTendances[1].style.backgroundColor = color;
+  buttonsTendances[0].style.color = color;
+  buttonsTendances[0].style.backgroundColor = white;
+  fillMoviesList(apiTrendingsWeek, tendances);
+});
 
 const options = {
   method: 'GET',
