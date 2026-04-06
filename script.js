@@ -1,10 +1,37 @@
 const apiPopulars = 'https://api.themoviedb.org/3/movie/popular';
 const apiTrendingsDay = 'https://api.themoviedb.org/3/trending/all/day';
 const apiTrendingsWeek = 'https://api.themoviedb.org/3/trending/all/week';
+const apiTvDay = 'https://api.themoviedb.org/3/trending/tv/day';
+const apiTvWeek = 'https://api.themoviedb.org/3/trending/tv/week';
+const apiMoviesDay = 'https://api.themoviedb.org/3/trending/movie/day';
+const apiMoviesWeek = 'https://api.themoviedb.org/3/trending/movie/week';
 const white = "#ffffff"
 const color = "#032541"
 let tendances = document.querySelector('#tendances');
 let buttonsTendances = tendances.querySelectorAll('button');
+let tv = document.querySelector('#tv');
+let buttonsTv = tv.querySelectorAll('button');
+let movies = document.querySelector('#films');
+let buttonsMovies = movies.querySelectorAll('button');
+
+const options = {
+  method: 'GET',
+  headers: {
+    accept: 'application/json',
+    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiMjhjZjZkMGQxZGM3MThiY2Y5MzQzYmUyZWMwMTgxYiIsIm5iZiI6MTc3NDczNjgwNS45NTM5OTk4LCJzdWIiOiI2OWM4NTVhNTk5NWY3YzRiM2ExMTAwM2MiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.NTbXlXBMNXFRJo180TmR4OmjIvwidxVVo7URZssCnLk'
+  }
+};
+
+const populars = await fetch(apiPopulars, options)
+  .then(res => res.json())
+  .catch(err => console.error(err));
+
+let search = document.querySelector('#search');
+search.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${populars.results[0].backdrop_path})`;
+
+fillMoviesList(apiTrendingsDay, tendances);
+fillMoviesList(apiTvDay, tv);
+fillMoviesList(apiMoviesDay, movies);
 
 buttonsTendances[0].style.color = white;
 buttonsTendances[0].style.backgroundColor = color;
@@ -23,22 +50,39 @@ buttonsTendances[1].addEventListener('click', ()=>{
   fillMoviesList(apiTrendingsWeek, tendances);
 });
 
-const options = {
-  method: 'GET',
-  headers: {
-    accept: 'application/json',
-    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiMjhjZjZkMGQxZGM3MThiY2Y5MzQzYmUyZWMwMTgxYiIsIm5iZiI6MTc3NDczNjgwNS45NTM5OTk4LCJzdWIiOiI2OWM4NTVhNTk5NWY3YzRiM2ExMTAwM2MiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.NTbXlXBMNXFRJo180TmR4OmjIvwidxVVo7URZssCnLk'
-  }
-};
+buttonsTv[0].style.color = white;
+buttonsTv[0].style.backgroundColor = color;
+buttonsTv[0].addEventListener('click', ()=>{
+  buttonsTv[0].style.color = white;
+  buttonsTv[0].style.backgroundColor = color;
+  buttonsTv[1].style.color = color;
+  buttonsTv[1].style.backgroundColor = white;
+  fillMoviesList(apiTvDay, tv);
+});
+buttonsTv[1].addEventListener('click', ()=>{
+  buttonsTv[1].style.color = white;
+  buttonsTv[1].style.backgroundColor = color;
+  buttonsTv[0].style.color = color;
+  buttonsTv[0].style.backgroundColor = white;
+  fillMoviesList(apiTvWeek, tv);
+});
 
-const populars = await fetch(apiPopulars, options)
-  .then(res => res.json())
-  .catch(err => console.error(err));
-
-let search = document.querySelector('#search');
-search.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${populars.results[0].backdrop_path})`;
-
-fillMoviesList(apiTrendingsDay, tendances);
+buttonsMovies[0].style.color = white;
+buttonsMovies[0].style.backgroundColor = color;
+buttonsMovies[0].addEventListener('click', ()=>{
+  buttonsMovies[0].style.color = white;
+  buttonsMovies[0].style.backgroundColor = color;
+  buttonsMovies[1].style.color = color;
+  buttonsMovies[1].style.backgroundColor = white;
+  fillMoviesList(apiMoviesDay, movies);
+});
+buttonsMovies[1].addEventListener('click', ()=>{
+  buttonsMovies[1].style.color = white;
+  buttonsMovies[1].style.backgroundColor = color;
+  buttonsMovies[0].style.color = color;
+  buttonsMovies[0].style.backgroundColor = white;
+  fillMoviesList(apiMoviesWeek, movies);
+});
 
 function numberToMonth(nb){
   switch (nb) {
