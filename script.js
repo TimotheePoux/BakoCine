@@ -16,6 +16,42 @@ console.log('Données récupérées :', data); //vérifie que les donnés sont b
 let search = document.querySelector('#search');
 search.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${data.results[0].backdrop_path})`;
 
+function numberToMonth(nb){
+  switch (nb) {
+    case '01':
+      return 'janv'
+    case '02':
+      return 'févr'
+    case '03':
+      return 'mars'
+    case '04':
+      return 'avri'
+    case '05':
+      return 'mai'
+    case '06':
+      return 'juin'
+    case '07':
+      return 'juil'
+    case '08':
+      return 'aoüt'
+    case '09':
+      return 'sept'
+    case '10':
+      return 'oct'
+    case '11':
+      return 'nove'
+    case '12':
+      return 'déce'
+    default:
+      return 'error';
+  }
+}
+
+function prettyDate(date){
+  let newDate = `${date.slice(8,10)} ${numberToMonth(date.slice(5,7))} ${date.slice(0,4)}`;
+  return newDate;
+}
+
 let poster = document.querySelectorAll('img');
 let title = document.querySelectorAll('.movieTitle');
 let date = document.querySelectorAll('.movieDate');
@@ -23,6 +59,6 @@ let note = document.querySelectorAll('.movieNote');
 for (let i = 0; i<4; i++){
 poster[i].src = `https://image.tmdb.org/t/p/original${data.results[i].poster_path}`;
 title[i].innerHTML = data.results[i].title;
-date[i].innerHTML = data.results[i].release_date;
+date[i].innerHTML = prettyDate(data.results[i].release_date);
 note[i].innerHTML = `${Math.round(data.results[i].vote_average*10)}%`;
 }
