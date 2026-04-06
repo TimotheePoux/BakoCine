@@ -87,29 +87,29 @@ buttonsMovies[1].addEventListener('click', ()=>{
 function numberToMonth(nb){
   switch (nb) {
     case '01':
-      return 'janv'
+      return 'janvier'
     case '02':
-      return 'févr'
+      return 'février'
     case '03':
       return 'mars'
     case '04':
-      return 'avr'
+      return 'avril'
     case '05':
       return 'mai'
     case '06':
       return 'juin'
     case '07':
-      return 'juil'
+      return 'juillet'
     case '08':
       return 'août'
     case '09':
-      return 'sept'
+      return 'septembre'
     case '10':
-      return 'oct'
+      return 'octobre'
     case '11':
-      return 'nove'
+      return 'novembre'
     case '12':
-      return 'déce'
+      return 'décembre'
     default:
       return 'error';
   }
