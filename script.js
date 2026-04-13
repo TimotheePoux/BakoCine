@@ -1,18 +1,16 @@
 const apiPopulars = 'https://api.themoviedb.org/3/movie/popular';
-const apiTrendingsDay = 'https://api.themoviedb.org/3/trending/all/day';
-const apiTrendingsWeek = 'https://api.themoviedb.org/3/trending/all/week';
-const apiTvDay = 'https://api.themoviedb.org/3/trending/tv/day';
-const apiTvWeek = 'https://api.themoviedb.org/3/trending/tv/week';
-const apiMoviesDay = 'https://api.themoviedb.org/3/trending/movie/day';
-const apiMoviesWeek = 'https://api.themoviedb.org/3/trending/movie/week';
+const apiTrendings = 'https://api.themoviedb.org/3/trending/'
+const trendingsCategories = ['all', 'tv', 'movie']
 const white = "#ffffff"
 const color = "#032541"
-let tendances = document.querySelector('#tendances');
-let buttonsTendances = tendances.querySelectorAll('button');
-let tv = document.querySelector('#tv');
-let buttonsTv = tv.querySelectorAll('button');
-let movies = document.querySelector('#films');
-let buttonsMovies = movies.querySelectorAll('button');
+let buttons = [];
+let lists = [];
+lists[0] = document.querySelector('#tendances');
+buttons[0] = lists[0].querySelectorAll('button');
+lists[1] = document.querySelector('#tv');
+buttons[1] = lists[1].querySelectorAll('button');
+lists[2] = document.querySelector('#films');
+buttons[2] = lists[2].querySelectorAll('button');
 
 const options = {
   method: 'GET',
@@ -29,59 +27,29 @@ const populars = await fetch(apiPopulars, options)
 let search = document.querySelector('#search');
 search.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${populars.results[0].backdrop_path})`;
 
-fillMoviesList(apiTrendingsDay, tendances);
-fillMoviesList(apiTvDay, tv);
-fillMoviesList(apiMoviesDay, movies);
+fillMoviesList(`${apiTrendings}${trendingsCategories[0]}/day`, lists[0]);
+fillMoviesList(`${apiTrendings}${trendingsCategories[1]}/day`, lists[1]);
+fillMoviesList(`${apiTrendings}${trendingsCategories[2]}/day`, lists[2]);
 
-buttonsTendances[0].style.color = white;
-buttonsTendances[0].style.backgroundColor = color;
-buttonsTendances[0].addEventListener('click', ()=>{
-  buttonsTendances[0].style.color = white;
-  buttonsTendances[0].style.backgroundColor = color;
-  buttonsTendances[1].style.color = color;
-  buttonsTendances[1].style.backgroundColor = white;
-  fillMoviesList(apiTrendingsDay, tendances);
-});
-buttonsTendances[1].addEventListener('click', ()=>{
-  buttonsTendances[1].style.color = white;
-  buttonsTendances[1].style.backgroundColor = color;
-  buttonsTendances[0].style.color = color;
-  buttonsTendances[0].style.backgroundColor = white;
-  fillMoviesList(apiTrendingsWeek, tendances);
-});
-
-buttonsTv[0].style.color = white;
-buttonsTv[0].style.backgroundColor = color;
-buttonsTv[0].addEventListener('click', ()=>{
-  buttonsTv[0].style.color = white;
-  buttonsTv[0].style.backgroundColor = color;
-  buttonsTv[1].style.color = color;
-  buttonsTv[1].style.backgroundColor = white;
-  fillMoviesList(apiTvDay, tv);
-});
-buttonsTv[1].addEventListener('click', ()=>{
-  buttonsTv[1].style.color = white;
-  buttonsTv[1].style.backgroundColor = color;
-  buttonsTv[0].style.color = color;
-  buttonsTv[0].style.backgroundColor = white;
-  fillMoviesList(apiTvWeek, tv);
-});
-
-buttonsMovies[0].style.color = white;
-buttonsMovies[0].style.backgroundColor = color;
-buttonsMovies[0].addEventListener('click', ()=>{
-  buttonsMovies[0].style.color = white;
-  buttonsMovies[0].style.backgroundColor = color;
-  buttonsMovies[1].style.color = color;
-  buttonsMovies[1].style.backgroundColor = white;
-  fillMoviesList(apiMoviesDay, movies);
-});
-buttonsMovies[1].addEventListener('click', ()=>{
-  buttonsMovies[1].style.color = white;
-  buttonsMovies[1].style.backgroundColor = color;
-  buttonsMovies[0].style.color = color;
-  buttonsMovies[0].style.backgroundColor = white;
-  fillMoviesList(apiMoviesWeek, movies);
+buttons.forEach(button => {
+  button[0].style.color = white;
+  button[0].style.backgroundColor = color;
+  button[0].addEventListener('click', ()=>{
+    button[0].style.color = white;
+    button[0].style.backgroundColor = color;
+    button[1].style.color = color;
+    button[1].style.backgroundColor = white;
+    let index = buttons.indexOf(button);
+    fillMoviesList(`${apiTrendings}${trendingsCategories[index]}/day`, lists[index]);
+  });
+  button[1].addEventListener('click', ()=>{
+    button[1].style.color = white;
+    button[1].style.backgroundColor = color;
+    button[0].style.color = color;
+    button[0].style.backgroundColor = white;
+    let index = buttons.indexOf(button)
+    fillMoviesList(`${apiTrendings}${trendingsCategories[index]}/week`, lists[index]);
+  });
 });
 
 function numberToMonth(nb){
