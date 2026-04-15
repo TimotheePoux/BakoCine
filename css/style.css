@@ -16,7 +16,7 @@ button{
 }
 
 header{
-    padding: 0 4% 0 4%;
+    padding: 0 4%;
     background-color: var(--color);
     display: flex;
     justify-content: space-between;
@@ -24,7 +24,7 @@ header{
     #title{
         color: var(--white);
         text-decoration: none;
-        margin: 0.5% 0 0.5% 0;
+        margin: 0.5% 0;
         font-size: 2em;
         display: flex;
         h1{
@@ -37,7 +37,7 @@ header{
     }
     nav{
         font-size: 1.5em;
-        margin: auto 0 auto 0;
+        margin: auto 0;
         display: flex;
         justify-content: right;
         position: relative;
@@ -64,14 +64,29 @@ header{
             right: 100%;
             top: 10%;
             z-index: 1;
-            padding: 5% 10% 5% 10%;
+            padding: 5% 10%;
             border-radius: 10px;
             box-shadow: 5px 5px 10px rgb(0 0 0 / 0.4);
             margin: 0;
             li{
-                margin: 7% 0% 7% 0%;
+                margin: 7% 0%;
             }
         }
+    }
+}
+
+.divNote{
+    height: 2.7em;
+    width: 2.7em;
+    display: flex;
+    justify-content: center;
+    background-color: var(--color);
+    color: var(--white);
+    border-radius: 100%;
+    border: var(--white) solid 3px;
+    box-shadow: 2px 2px 2px rgb(0 0 0 / 0.2);
+    p{
+        margin: auto 0 auto 0;
     }
 }
 

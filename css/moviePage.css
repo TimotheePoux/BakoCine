@@ -1,0 +1,26 @@
+#presentation{
+    display: flex;
+    padding: 3% 5%;
+    color: var(--white);
+    img{
+        width: 20%;
+        height: auto;
+        margin-right: 5%;
+    }
+    #text{
+        width: 50%;
+        div{
+            display: flex;
+            #infos{
+                margin: 0 0 4% 2%;
+                flex-direction: column;
+                h2{
+                    margin: 0;
+                }
+                p{
+                    margin: 0;
+                }
+            }   
+        }
+    }
+}
