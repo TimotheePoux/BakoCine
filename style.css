@@ -239,8 +239,8 @@ section{
 
 @media screen and (max-width:426px){
     header{
-        div{
-            font-size: 1.2em;
+        #title{
+            font-size: 1.2em;;
         }
         nav{
             font-size: 1em;
