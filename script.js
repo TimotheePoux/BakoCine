@@ -96,22 +96,24 @@ async function fillList(apiLink, section){ //fonction qui remplit une liste de t
     .then(res => res.json())
     .catch(err => console.error(err));
   //récupère les éléments de la page html qui devront être modifiés
-  let poster = section.querySelectorAll('img');
-  let title = section.querySelectorAll('.movieTitle');
-  let date = section.querySelectorAll('.movieDate');
-  let note = section.querySelectorAll('.movieNote');
+  let links = section.querySelectorAll('a')
+  let posters = section.querySelectorAll('img');
+  let titles = section.querySelectorAll('.movieTitle');
+  let dates = section.querySelectorAll('.movieDate');
+  let notes = section.querySelectorAll('.movieNote');
   //remplace les valeurs de défaut par les valeurs fournies par l'api
   for (let i = 0; i<4; i++){
-    poster[i].src = `https://image.tmdb.org/t/p/original${data.results[i].poster_path}`;
-    note[i].innerHTML = `${Math.round(data.results[i].vote_average*10)}%`;
+    posters[i].src = `https://image.tmdb.org/t/p/original${data.results[i].poster_path}`;
+    notes[i].innerHTML = `${Math.round(data.results[i].vote_average*10)}%`;
+    links[i].href = `./movie.html`;
     //condition nécéssaire car l'api ne donne pas le même nom au titre et à la date en fonction de si on a un film ou une séries
     if (data.results[i].media_type == "movie"){
-      title[i].innerHTML = data.results[i].title;
-      date[i].innerHTML = prettyDate(data.results[i].release_date);
+      titles[i].innerHTML = data.results[i].title;
+      dates[i].innerHTML = prettyDate(data.results[i].release_date);
     }
     else if (data.results[i].media_type == "tv"){
-      title[i].innerHTML = data.results[i].name;
-      date[i].innerHTML = prettyDate(data.results[i].first_air_date);
+      titles[i].innerHTML = data.results[i].name;
+      dates[i].innerHTML = prettyDate(data.results[i].first_air_date);
     }
   }
 }
