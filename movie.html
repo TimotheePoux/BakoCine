@@ -6,6 +6,8 @@
     <title>BakoCiné</title>
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="./css/moviePage.css" />
+    <script src="fonctions.js"></script>
+    <script src="moviePage.js" defer type="module"></script>
 </head>
 <body>
     <header>
@@ -63,7 +65,7 @@
     </header>
     <main>
         <section id = 'presentation'>
-            <img src="./poster.webp" alt="Affiche">
+            <img src="./poster.webp" alt="Affiche" id = "poster">
             <div id = text>
                 <div>
                     <div class = "divNote">
@@ -71,10 +73,10 @@
                     </div>
                     <div id = "infos">
                         <h2>Titre (Année)</h2>
-                        <p>Date - Genres - Durée</p>
+                        <p id = "dgd">Date - Genres - Durée</p>
                     </div>
                 </div>
-                <p><strong>Synopsis</strong><br><br></p>
+                <p id ="synopsis"><strong>Synopsis</strong><br><br></p>
             </div>
         </section>
     </maisn>

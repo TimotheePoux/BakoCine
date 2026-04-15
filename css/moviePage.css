@@ -2,6 +2,10 @@
     display: flex;
     padding: 3% 5%;
     color: var(--white);
+    background: rgba(0, 0, 0, 0.7);
+    background-size:100%;
+    background-position-y: center;
+    background-blend-mode: darken;
     img{
         width: 20%;
         height: auto;
