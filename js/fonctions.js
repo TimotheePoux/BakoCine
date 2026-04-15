@@ -1,3 +1,11 @@
+const options = { //options nécéssaires lorsqu'on fetch une API
+  method: 'GET',
+  headers: {
+    accept: 'application/json',
+    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiMjhjZjZkMGQxZGM3MThiY2Y5MzQzYmUyZWMwMTgxYiIsIm5iZiI6MTc3NDczNjgwNS45NTM5OTk4LCJzdWIiOiI2OWM4NTVhNTk5NWY3YzRiM2ExMTAwM2MiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.NTbXlXBMNXFRJo180TmR4OmjIvwidxVVo7URZssCnLk'
+  }
+};
+
 function numberToMonth(nb){//fonction qui prend en entrée une chaine de caratères correspondant à un numéro de mois et qui renvoie le nom du mois correspondant
   switch (nb) {
     case '01':

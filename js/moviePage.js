@@ -1,13 +1,5 @@
 const params = new URLSearchParams(window.location.search);
 
-const options = { //options nécéssaires lorsqu'on fetch une API
-    method: 'GET',
-    headers: {
-    accept: 'application/json',
-    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiMjhjZjZkMGQxZGM3MThiY2Y5MzQzYmUyZWMwMTgxYiIsIm5iZiI6MTc3NDczNjgwNS45NTM5OTk4LCJzdWIiOiI2OWM4NTVhNTk5NWY3YzRiM2ExMTAwM2MiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.NTbXlXBMNXFRJo180TmR4OmjIvwidxVVo7URZssCnLk'
-  }
-};
-
 const apiLink = `https://api.themoviedb.org/3/${params.get('type')}/${params.get('id')}`;
 
 const data = await fetch(apiLink, options) //on récupère les données du film ou de la série

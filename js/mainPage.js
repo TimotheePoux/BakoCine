@@ -12,14 +12,6 @@ buttons[1] = lists[1].querySelectorAll('button');
 lists[2] = document.querySelector('#films');
 buttons[2] = lists[2].querySelectorAll('button');
 
-const options = { //options nécéssaires lorsqu'on fetch une API
-  method: 'GET',
-  headers: {
-    accept: 'application/json',
-    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiMjhjZjZkMGQxZGM3MThiY2Y5MzQzYmUyZWMwMTgxYiIsIm5iZiI6MTc3NDczNjgwNS45NTM5OTk4LCJzdWIiOiI2OWM4NTVhNTk5NWY3YzRiM2ExMTAwM2MiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.NTbXlXBMNXFRJo180TmR4OmjIvwidxVVo7URZssCnLk'
-  }
-};
-
 const populars = await fetch(apiPopulars, options) //on récupère la liste des films les plus populaires
   .then(res => res.json())
   .catch(err => console.error(err));
