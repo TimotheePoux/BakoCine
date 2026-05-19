@@ -157,7 +157,7 @@ async function research(toSearch){
 
   listResultsMovies.innerHTML = "";
   if (dataMovies.results.length == 0){
-    listResultsMovies.innerHTML = `<p class = "zero_resultat">Aucun réultat trouvé<\p>`;
+    listResultsMovies.innerHTML = `<p class = "zero_resultat">Aucun réultat trouvé</p>`;
   }
   else{
     for (let i = 0; i < dataMovies.results.length; i++){
@@ -190,7 +190,7 @@ async function research(toSearch){
   
   listResultsTV.innerHTML = "";
   if (dataTV.results.length == 0){
-    listResultsTV.innerHTML = `<p class = "zero_resultat">Aucun réultat trouvé<\p>`;
+    listResultsTV.innerHTML = `<p class = "zero_resultat">Aucun réultat trouvé</p>`;
   }
   else{
     for (let i = 0; i < dataTV.results.length ; i++){

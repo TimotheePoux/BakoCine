@@ -4,11 +4,31 @@ section{
     img{
         width: 25%;
         margin: 2%;
+        object-fit:contain;
     }
     h2{
         margin: 5% 0 0 0;
     }
-    #naissanceMort{
+    #gnm{
         margin: 0;
+    }
+}
+
+@media screen and (max-width:768px) {
+    section>img{
+        width: 50%;
+    }
+}
+
+@media screen and (max-width:426px) {
+    section{
+        flex-direction: column;
+        align-items: center;
+        img{
+            width: 75%;
+        }
+        div{
+            text-align: center;
+        }
     }
 }
