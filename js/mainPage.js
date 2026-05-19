@@ -1,6 +1,4 @@
-const apiPopulars = 'https://api.themoviedb.org/3/movie/popular'; //lien vers une liste des films les plus populaires
-const apiTrendings = 'https://api.themoviedb.org/3/trending/' // lien vers la liste des tendances (à compléter avec la catégorie et la période de temps)
-const trendingsCategories = ['all', 'tv', 'movie'] //les catégories de tendances
+const apiLinkBase = 'https://api.themoviedb.org/3/'; //lien de l'api que l'on va agrémenter en fonction de ce que l'on veut chercher
 const white = "#ffffff"
 const color = "#032541"
 let buttons = [];
@@ -12,39 +10,39 @@ buttons[1] = lists[1].querySelectorAll('button');
 lists[2] = document.querySelector('#films');
 buttons[2] = lists[2].querySelectorAll('button');
 
-const populars = await fetch(apiPopulars, options) //on récupère la liste des films les plus populaires
+const trending = await fetch(`${apiLinkBase}trending/all/day`, options) //on récupère la liste des tendances
   .then(res => res.json())
   .catch(err => console.error(err));
-
+console.log(trending.results);
 let search = document.querySelector('#search');
-search.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${populars.results[0].backdrop_path})`; //on met comme fond de la barre de recherche le film le plus populaire du moment
+search.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${trending.results[0].backdrop_path})`; //on met comme fond de la barre de recherche le film ou la série la plus en tendance du moment
 
-//au chargement de la page, on remplit les 3 listes avec les tendances du jour
-fillList(`${apiTrendings}${trendingsCategories[0]}/day`, lists[0]);
-fillList(`${apiTrendings}${trendingsCategories[1]}/day`, lists[1]);
-fillList(`${apiTrendings}${trendingsCategories[2]}/day`, lists[2]);
+//au chargement de la page, on remplit les 3 listes avec les reglages par défaut
+fillList(`${apiLinkBase}trending/all/day`, lists[0]);
+fillList(`${apiLinkBase}tv/top_rated`, lists[1]);
+fillList(`${apiLinkBase}movie/top_rated`, lists[2]);
 
 buttons.forEach(button => {
-  //au chargement de la page, on affiche le bouton "Aujourd'hui" actionné
+  //au chargement de la page, on affiche le premier bouton activé
   button[0].style.color = white;
   button[0].style.backgroundColor = color;
-  //si on appuie sur le bouton "Aujourd'hui", on remplit la liste avec les tendances du jour
+
   button[0].addEventListener('click', ()=>{
     button[0].style.color = white;
     button[0].style.backgroundColor = color;
     button[1].style.color = color;
     button[1].style.backgroundColor = white;
     let index = buttons.indexOf(button);
-    fillList(`${apiTrendings}${trendingsCategories[index]}/day`, lists[index]);
+    fillList(`${apiLinkBase}${button[0].value}`, lists[index]);
   });
-  //si on appuie sur le bouton "Cette semaine", on remplit la liste avec les tendances de la semaine
+
   button[1].addEventListener('click', ()=>{
     button[1].style.color = white;
     button[1].style.backgroundColor = color;
     button[0].style.color = color;
     button[0].style.backgroundColor = white;
     let index = buttons.indexOf(button)
-    fillList(`${apiTrendings}${trendingsCategories[index]}/week`, lists[index]);
+    fillList(`${apiLinkBase}${button[1].value}`, lists[index]);
   });
 });
 
