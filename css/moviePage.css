@@ -12,6 +12,7 @@
         margin-right: 5%;
     }
     #text{
+        width: 100%;
         div{
             display: flex;
             #infos{

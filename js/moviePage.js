@@ -34,11 +34,31 @@ data.genres.forEach(genre => {
 });
 if (params.get('type') == 'movie'){
     h2.innerHTML = `${data.title} (${data.release_date.slice(0,4)})`;
-    dgd.innerHTML = `${prettyDate(data.release_date)} - ${genres.slice(0,genres.length-2)} - ${convertRuntime(data.runtime)}`;
+    dgd.innerHTML = `${prettyDate(data.release_date)}`;
+    if (genres != ""){
+        dgd.innerHTML += ` - ${genres.slice(0,genres.length-2)}`;
+    }
+    if (data.runtime != 0){
+        dgd.innerHTML += ` - ${convertRuntime(data.runtime)}`;
+    }
 }
 else{
     h2.innerHTML = `${data.name} (${data.first_air_date.slice(0,4)})`;
-    dgd.innerHTML = `${prettyDate(data.first_air_date)} - ${genres.slice(0,genres.length-2)} - ${data.number_of_episodes} episodes`;
+    dgd.innerHTML = `${prettyDate(data.first_air_date)}`;
+    if (genres != ""){
+        dgd.innerHTML += ` - ${genres.slice(0,genres.length-2)}`;
+    }
+    if (data.number_of_episodes != 0){
+        dgd.innerHTML += ` - ${data.number_of_episodes} episodes`;
+    }
+}
+
+let synopsis = document.querySelector("#synopsis");
+if (data.overview == ""){
+    synopsis.innerHTML += "aucun synopsis diponnible";
+}
+else{
+    synopsis.innerHTML += await translate(data.overview);
 }
 
 let list = document.querySelector(".list");
@@ -66,6 +86,3 @@ else{
         `;
     }
 }
-
-let synopsis = document.querySelector("#synopsis");
-synopsis.innerHTML += await translate(data.overview);
