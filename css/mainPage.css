@@ -117,6 +117,10 @@ section{
     background-color: var(--gray);
 }
 
+.zero_resultat{
+    margin: 5% auto;
+}
+
 @media screen and (max-width:768px){
     section{
         .titleList{
