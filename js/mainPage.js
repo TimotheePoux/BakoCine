@@ -48,12 +48,26 @@ buttons.forEach(button => {
   });
 });
 
+let resultsSection = document.querySelector('#research_results')
+let search_input = document.querySelector('#search-input');
+let search_button = document.querySelector('#search-button');
+resultsSection.style.display = "none";
+search_button.addEventListener('click', ()=>{
+  if (search_input.value != ""){
+    resultsSection.style.display = "inline";
+    research(search_input.value);
+  }
+  else{
+    resultsSection.style.display = "none";
+  }
+});
+
 async function fillList(apiLink, section){ //fonction qui remplit une liste de tendances avec les films/séries spécifiées par le lien prit en paramètre
   const data = await fetch(apiLink, options) //récupère la liste des tendances grace au lien de l'api pris en paramètre
     .then(res => res.json())
     .catch(err => console.error(err));
   //récupère les éléments de la page html qui devront être modifiés
-  let links = section.querySelectorAll('a')
+  let links = section.querySelectorAll('a');
   let posters = section.querySelectorAll('img');
   let titles = section.querySelectorAll('.movieTitle');
   let dates = section.querySelectorAll('.movieDate');
@@ -71,6 +85,86 @@ async function fillList(apiLink, section){ //fonction qui remplit une liste de t
     else if (data.results[i].media_type == "tv"){
       titles[i].innerHTML = data.results[i].name;
       dates[i].innerHTML = prettyDate(data.results[i].first_air_date);
+    }
+  }
+}
+
+async function research(toSearch){
+  const urlMovies = `https://api.themoviedb.org/3/search/movie?query=${toSearch}`;
+  const responseMovies = await fetch(urlMovies, {
+    headers: {
+      "Authorization": `Bearer ${token}`
+    }
+  });
+  let dataMovies = await responseMovies.json();
+  if (dataMovies.results.length > 12){
+    dataMovies.results.length = 12;
+  }
+  let listResultsMovies = document.querySelector("#listResultsMovies");
+  listResultsMovies.innerHTML = ""
+  if (dataMovies.results.length == 0){
+    listResultsMovies.innerHTML = "Aucun réultat trouvé"
+  }
+  else{
+    for (let i = 0; i < dataMovies.results.length; i++){
+      let posterPath = "";
+      if (dataMovies.results[i].poster_path == null){
+        posterPath = "./poster.webp";
+      }
+      else{
+        posterPath = `https://image.tmdb.org/t/p/original${dataMovies.results[i].poster_path}`;
+      }
+      listResultsMovies.innerHTML +=`
+        <article>
+          <a href = "./movie.html?type=movie&id=${dataMovies.results[i].id}">
+            <img src = "${posterPath}" alt="Affiche" class = "poster">
+            <div class = "divNote">
+              <p class = "movieNote">${Math.round(dataMovies.results[i].vote_average*10)}%</p>
+            </div>
+          </a>
+          <p class = "movieTitle">${dataMovies.results[i].title}</p>
+          <p class = "movieDate">${prettyDate(dataMovies.results[i].release_date)}</p>
+          </article>
+      `;
+    }
+  }
+
+  const urlTV = `https://api.themoviedb.org/3/search/tv?query=${toSearch}`;
+  const responseTV = await fetch(urlTV, {
+    headers: {
+      "Authorization": `Bearer ${token}`
+    }
+  });
+  let dataTV = await responseTV.json();
+  if (dataTV.results.length > 12){
+    dataTV.results.length = 12;
+  }
+  let listResultsTV = document.querySelector("#listResultsTV");
+  listResultsTV.innerHTML = ""
+  if (dataTV.results.length == 0){
+    listResultsTV.innerHTML = "Aucun réultat trouvé"
+  }
+  else{
+    for (let i = 0; i < dataTV.results.length; i++){
+      let posterPath = "";
+      if (dataTV.results[i].poster_path == null){
+        posterPath = "./poster.webp";
+      }
+      else{
+        posterPath = `https://image.tmdb.org/t/p/original${dataTV.results[i].poster_path}`;
+      }
+      listResultsTV.innerHTML +=`
+        <article>
+          <a href = "./movie.html?type=movie&id=${dataTV.results[i].id}">
+            <img src = "${posterPath}" alt="Affiche" class = "poster">
+            <div class = "divNote">
+              <p class = "movieNote">${Math.round(dataTV.results[i].vote_average*10)}%</p>
+            </div>
+          </a>
+          <p class = "movieTitle">${dataTV.results[i].name}</p>
+          <p class = "movieDate">${prettyDate(dataTV.results[i].first_air_date)}</p>
+          </article>
+      `;
     }
   }
 }

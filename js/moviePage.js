@@ -21,7 +21,9 @@ let presentation = document.querySelector("#presentation")
 presentation.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${data.backdrop_path})`;
 
 let poster = document.querySelector("#poster");
-poster.src = `https://image.tmdb.org/t/p/original${data.poster_path}`;
+if (data.poster_path != null){
+    poster.src = `https://image.tmdb.org/t/p/original${data.poster_path}`;
+}
 
 let movieNote = document.querySelector(".movieNote");
 movieNote.innerHTML = `${Math.round(data.vote_average*10)}%`;

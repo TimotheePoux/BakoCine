@@ -73,9 +73,11 @@ section{
     .list{
         display: flex;
         justify-content: space-around;
-        padding:2% 0;
+        flex-wrap: wrap;
+        padding:0%;
         article{
             width: 15%;
+            margin: 2% 5%;
             a{
                 position: relative;
                 .poster{
@@ -119,13 +121,8 @@ section{
                 width: 20%;
             }
         }
-        .list{
-            display: grid;
-            grid-template-areas: 'article article';
-            article{
-                width: 65%;
-                margin: 0 auto 5% auto;
-            }
+        .list>article{
+            width: 40%;
         }
     }
 }
@@ -148,10 +145,9 @@ section{
                 width: 40%;
             }
         }
-        .list{
-            display: flex;
-            flex-direction: column;
-            article>div>div{
+        .list>article{
+            width: 70%;
+            div>div{
                 bottom: -4%;
             }
         }
