@@ -30,9 +30,10 @@ header{
         h1{
             margin: auto;
         }
-        svg{
+        img{
             width:3.5em;
             padding-right: 5%;
+            filter: invert(1);
         }
     }
     nav{
@@ -87,6 +88,19 @@ header{
     box-shadow: 2px 2px 2px rgb(0 0 0 / 0.2);
     p{
         margin: auto 0 auto 0;
+    }
+}
+
+footer{
+    background-color: var(--color);
+    display: flex;
+    padding: 2% 2%;
+    justify-content: space-between;
+    img{
+        width: 25%;
+    }
+    p{
+        color: var(--white);
     }
 }
 

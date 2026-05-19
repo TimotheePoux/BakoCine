@@ -103,25 +103,29 @@ async function fillList(apiLink, section){ //fonction qui remplit une liste de t
   list.innerHTML = "";
 
   for (let i = 0; i<4; i++){
-    let posterPath = "./poster.webp";
+    let posterPath = "./media/poster.webp";
     if (data.results[i].poster_path != null){
       posterPath = `https://image.tmdb.org/t/p/original${data.results[i].poster_path}`;
     }
+    console.log(data.results);
     let titre = "";
     let date = "";
+    let href = "";
     //condition nécéssaire car l'api ne donne pas le même nom au titre et à la date en fonction de si on a un film ou une séries
-    if (data.results[i].media_type == "movie"){
+    if ("title" in data.results[i]){
       titre = data.results[i].title;
       date = prettyDate(data.results[i].release_date);
+      href = `./movie.html?type=movie&id=${data.results[i].id}`;
     }
-    else if (data.results[i].media_type == "tv"){
+    else {
       titre = data.results[i].name;
       date = prettyDate(data.results[i].first_air_date);
+      href = `./movie.html?type=tv&id=${data.results[i].id}`;
     }
     //On crée un article qui contient les informations fournies par l'API
     list.innerHTML +=`
     <article>
-      <a href = "./movie.html?type=${data.results[i].media_type}&id=${data.results[i].id}">
+      <a href = ${href}>
         <img src = "${posterPath}" alt="Affiche" class = "poster">
         <div class = "divNote">
           <p class = "movieNote">${Math.round(data.results[i].vote_average*10)}%</p>
@@ -150,14 +154,14 @@ async function research(toSearch){
     }
   });
   let dataMovies = await responseMovies.json();
-  console.log(dataMovies.results);
+
   listResultsMovies.innerHTML = "";
   if (dataMovies.results.length == 0){
     listResultsMovies.innerHTML = `<p class = "zero_resultat">Aucun réultat trouvé<\p>`;
   }
   else{
     for (let i = 0; i < dataMovies.results.length; i++){
-      let posterPath = "./poster.webp";
+      let posterPath = "./media/poster.webp";
       if (dataMovies.results[i].poster_path != null){
         posterPath = `https://image.tmdb.org/t/p/original${dataMovies.results[i].poster_path}`;
       }
@@ -192,7 +196,7 @@ async function research(toSearch){
     for (let i = 0; i < dataTV.results.length ; i++){
       let posterPath = "";
       if (dataTV.results[i].poster_path == null){
-        posterPath = "./poster.webp";
+        posterPath = "./media/poster.webp";
       }
       else{
         posterPath = `https://image.tmdb.org/t/p/original${dataTV.results[i].poster_path}`;
