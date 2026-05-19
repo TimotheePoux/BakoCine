@@ -100,6 +100,9 @@ async function fillList(apiLink, section){ //fonction qui remplit une liste de t
   const data = await fetch(apiLink, options) //récupère la liste des tendances grace au lien de l'api pris en paramètre
     .then(res => res.json())
     .catch(err => console.error(err));
+  
+  let list = section.querySelector(".list");
+  list.innerHTML = "";
 
   for (let i = 0; i<4; i++){
     let posterPath = "./poster.webp";
@@ -118,7 +121,6 @@ async function fillList(apiLink, section){ //fonction qui remplit une liste de t
       date = prettyDate(data.results[i].first_air_date);
     }
     //On crée un article qui contient les informations fournies par l'API
-    let list = section.querySelector(".list")
     list.innerHTML +=`
     <article>
       <a href = "./movie.html?type=${data.results[i].media_type}&id=${data.results[i].id}">
