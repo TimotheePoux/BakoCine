@@ -190,6 +190,17 @@ footer{
             flex-direction: column;
         }
     }
+    section{
+        .titleList{
+            justify-content: center;
+            button{
+                width: 20%;
+            }
+        }
+        .list>article{
+            width: 40%;
+        }
+    }
 }
 
 @media screen and (max-width:426px){
@@ -199,6 +210,30 @@ footer{
         }
         nav{
             font-size: 1em;
+        }
+    }
+    #search>div>input{
+            font-size: 1.2em;
+            margin-left: 1.5%;
+        }
+    section{
+        .titleList{
+            flex-direction: column;
+            margin-left: 0;
+            h2{
+                text-align: center;
+            }
+            button{
+                margin: 1% auto;
+                justify-content: center;
+                width: 40%;
+            }
+        }
+        .list>article{
+            width: 60%;
+            div>div{
+                bottom: -4%;
+            }
         }
     }
 }

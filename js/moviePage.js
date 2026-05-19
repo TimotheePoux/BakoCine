@@ -45,7 +45,7 @@ let list = document.querySelector(".list");
 const dataCredits = await fetch(`${apiLink}/credits`, options) //on récupère les données des crédits du film ou de la série
     .then(res => res.json())
     .catch(err => console.error(err));
-console.log(dataCredits);
+
 if (dataCredits.cast.length == 0){
      list.innerHTML = `<p class = "zero_resultat">Aucun acteur recensé</p>`
 }

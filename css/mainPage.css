@@ -56,53 +56,7 @@
     background-color: var(--gray);
 }
 
-@media screen and (max-width:768px){
-    section{
-        .titleList{
-            justify-content: center;
-            button{
-                width: 20%;
-            }
-        }
-        .list>article{
-            width: 40%;
-        }
-    }
-}
-
-@media screen and (max-width:426px){
-    #search>div>input{
-            font-size: 1.2em;
-            margin-left: 1.5%;
-        }
-    section{
-        .titleList{
-            flex-direction: column;
-            margin-left: 0;
-            h2{
-                text-align: center;
-            }
-            button{
-                margin: 1% auto;
-                justify-content: center;
-                width: 40%;
-            }
-        }
-        .list>article{
-            width: 70%;
-            div>div{
-                bottom: -4%;
-            }
-        }
-    }
-}
-
 @media screen and (max-width:320px){
-    header{
-        div{
-            font-size: 1em;
-        }
-    }
     #search{
         padding: 6% 0;
     }

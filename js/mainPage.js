@@ -13,7 +13,7 @@ buttons[2] = lists[2].querySelectorAll('button');
 const trending = await fetch(`${apiLinkBase}trending/all/day`, options) //on récupère la liste des tendances
   .then(res => res.json())
   .catch(err => console.error(err));
-console.log(trending.results);
+
 let search = document.querySelector('#search');
 search.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${trending.results[0].backdrop_path})`; //on met comme fond de la barre de recherche le film ou la série la plus en tendance du moment
 
@@ -107,7 +107,7 @@ async function fillList(apiLink, section){ //fonction qui remplit une liste de t
     if (data.results[i].poster_path != null){
       posterPath = `https://image.tmdb.org/t/p/original${data.results[i].poster_path}`;
     }
-    console.log(data.results);
+
     let titre = "";
     let date = "";
     let href = "";
