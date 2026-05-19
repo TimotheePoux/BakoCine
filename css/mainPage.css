@@ -46,68 +46,7 @@
     
 }
 
-section{
-    .titleList{
-        display: flex;
-        margin-left: 5%;
-        padding-top: 2%;
-        h2{
-            color: var(--color);
-            font-size: 2.5em;
-            margin: 0;
-        }
-        button{
-            margin: auto 0 auto 2%;
-            width: 15%;
-            height: 2.5em;
-            font-size: 1em;
-            background-color: var(--white);
-            border: var(--color) solid 3px;
-            color: var(--color);
-            transition: 0.3s;
-        }
-        button:hover{
-            transform: scale(1.1);
-        }
-    }
-    .list{
-        display: flex;
-        justify-content: space-around;
-        flex-wrap: wrap;
-        padding:0%;
-        article{
-            width: 15%;
-            margin: 2% 5%;
-            a{
-                position: relative;
-                .poster{
-                    width: 100%;
-                    transition: 0.3s;
-                    box-shadow: 2px 2px 2px rgb(0 0 0 / 0.2);
-                }
-                .poster:hover{
-                    box-shadow: 7px 7px 2px rgb(0 0 0 / 0.4);
-                }
-                div{
-                position: absolute;
-                right: -10%;
-                bottom: -6%;
-            }
-            }
 
-            .movieTitle{
-                color: var(--color);
-                font-weight: bold;
-                margin: 2% 0 0 0;
-                text-shadow: 2px 2px 2px rgb(0 0 0 / 0.2);
-            }
-            .movieDate{
-                margin: 0;
-                text-shadow: 2px 2px 2px rgb(0 0 0 / 0.2);
-            }
-        }
-    }
-}
 
 #tv{
     background-color: var(--gray);
@@ -115,10 +54,6 @@ section{
 
 #research_results{
     background-color: var(--gray);
-}
-
-.zero_resultat{
-    margin: 5% auto;
 }
 
 @media screen and (max-width:768px){

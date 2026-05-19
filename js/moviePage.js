@@ -6,8 +6,6 @@ const data = await fetch(apiLink, options) //on récupère les données du film 
     .then(res => res.json())
     .catch(err => console.error(err));
 
-console.log(data);
-
 function convertRuntime(time){
     let runtime = `${(time - time%60)/60}h`;
     if (time%60 < 10){
@@ -41,6 +39,32 @@ if (params.get('type') == 'movie'){
 else{
     h2.innerHTML = `${data.name} (${data.first_air_date.slice(0,4)})`;
     dgd.innerHTML = `${prettyDate(data.first_air_date)} - ${genres.slice(0,genres.length-2)} - ${data.number_of_episodes} episodes`;
+}
+
+let list = document.querySelector(".list");
+const dataCredits = await fetch(`${apiLink}/credits`, options) //on récupère les données des crédits du film ou de la série
+    .then(res => res.json())
+    .catch(err => console.error(err));
+console.log(dataCredits);
+if (dataCredits.cast.length == 0){
+     list.innerHTML = `<p class = "zero_resultat">Aucun acteur recensé</p>`
+}
+else{
+    for (let i = 0; i < 8; i++){
+        let profilePath = "./media/poster.webp";
+        if (dataCredits.cast[i].profile_path != null){
+            profilePath = `https://image.tmdb.org/t/p/original${dataCredits.cast[i].profile_path}`;
+        }
+        list.innerHTML +=`
+            <article>
+            <a href = "">
+                <img src = "${profilePath}" alt="Portrait" class = "poster">
+            </a>
+            <p class = "movieTitle">${dataCredits.cast[i].name}</p>
+            <p class = "movieDate">${dataCredits.cast[i].character}</p>
+            </article>
+        `;
+    }
 }
 
 let synopsis = document.querySelector("#synopsis");
