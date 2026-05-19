@@ -1,0 +1,14 @@
+section{
+    display: flex;
+    padding: 2% 5%;
+    img{
+        width: 25%;
+        margin: 2%;
+    }
+    h2{
+        margin: 5% 0 0 0;
+    }
+    #naissanceMort{
+        margin: 0;
+    }
+}

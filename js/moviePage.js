@@ -58,7 +58,7 @@ if (data.overview == ""){
     synopsis.innerHTML += "aucun synopsis diponnible";
 }
 else{
-    synopsis.innerHTML += await translate(data.overview);
+    synopsis.innerHTML += data.overview;
 }
 
 let list = document.querySelector(".list");
@@ -77,7 +77,7 @@ else{
         }
         list.innerHTML +=`
             <article>
-            <a href = "">
+            <a href = "./actor.html?id=${dataCredits.cast[i].id}">
                 <img src = "${profilePath}" alt="Portrait" class = "poster">
             </a>
             <p class = "movieTitle">${dataCredits.cast[i].name}</p>
