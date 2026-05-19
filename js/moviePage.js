@@ -43,8 +43,5 @@ else{
     dgd.innerHTML = `${prettyDate(data.first_air_date)} - ${genres.slice(0,genres.length-2)} - ${data.number_of_episodes} episodes`;
 }
 
-
-
-
 let synopsis = document.querySelector("#synopsis");
-synopsis.innerHTML += data.overview;
+synopsis.innerHTML += await translate(data.overview);
