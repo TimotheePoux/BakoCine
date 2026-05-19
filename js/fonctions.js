@@ -8,6 +8,8 @@ const options = { //options nécéssaires lorsqu'on fetch une API
   }
 };
 
+const endApiLink = '?language=fr'
+
 function numberToMonth(nb){//fonction qui prend en entrée une chaine de caratères correspondant à un numéro de mois et qui renvoie le nom du mois correspondant
   switch (nb) {
     case '01':

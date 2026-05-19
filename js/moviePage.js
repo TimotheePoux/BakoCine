@@ -2,7 +2,7 @@ const params = new URLSearchParams(window.location.search);
 
 const apiLink = `https://api.themoviedb.org/3/${params.get('type')}/${params.get('id')}`;
 
-const data = await fetch(apiLink, options) //on récupère les données du film ou de la série
+const data = await fetch(apiLink+endApiLink, options) //on récupère les données du film ou de la série
     .then(res => res.json())
     .catch(err => console.error(err));
 
@@ -62,7 +62,7 @@ else{
 }
 
 let list = document.querySelector(".list");
-const dataCredits = await fetch(`${apiLink}/credits`, options) //on récupère les données des crédits du film ou de la série
+const dataCredits = await fetch(`${apiLink}/credits${endApiLink}`, options) //on récupère les données des crédits du film ou de la série
     .then(res => res.json())
     .catch(err => console.error(err));
 

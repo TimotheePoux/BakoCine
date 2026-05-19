@@ -10,7 +10,7 @@ buttons[1] = lists[1].querySelectorAll('button');
 lists[2] = document.querySelector('#films');
 buttons[2] = lists[2].querySelectorAll('button');
 
-const trending = await fetch(`${apiLinkBase}trending/all/day`, options) //on récupère la liste des tendances
+const trending = await fetch(`${apiLinkBase}trending/all/day${endApiLink}`, options) //on récupère la liste des tendances
   .then(res => res.json())
   .catch(err => console.error(err));
 
@@ -95,7 +95,7 @@ if (search_input.value != ""){
 }
 
 async function fillList(apiLink, section){ //fonction qui remplit une liste de tendances avec les films/séries spécifiées par le lien prit en paramètre
-  const data = await fetch(apiLink, options) //récupère la liste des tendances grace au lien de l'api pris en paramètre
+  const data = await fetch(apiLink+endApiLink, options) //récupère la liste des tendances grace au lien de l'api pris en paramètre
     .then(res => res.json())
     .catch(err => console.error(err));
   
@@ -147,7 +147,7 @@ async function research(toSearch){
   listResultsMovies.style.display = "flex";
   listResultsTV.style.display = "none";
   
-  const urlMovies = `https://api.themoviedb.org/3/search/movie?query=${toSearch}`;
+  const urlMovies = `https://api.themoviedb.org/3/search/movie${endApiLink}&query=${toSearch}`;
   const responseMovies = await fetch(urlMovies, {
     headers: {
       "Authorization": `Bearer ${token}`
@@ -180,7 +180,7 @@ async function research(toSearch){
     }
   }
 
-  const urlTV = `https://api.themoviedb.org/3/search/tv?query=${toSearch}`;
+  const urlTV = `https://api.themoviedb.org/3/search/tv${endApiLink}&query=${toSearch}`;
   const responseTV = await fetch(urlTV, {
     headers: {
       "Authorization": `Bearer ${token}`

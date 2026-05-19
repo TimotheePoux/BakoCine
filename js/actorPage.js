@@ -2,7 +2,7 @@ const params = new URLSearchParams(window.location.search);
 
 const apiLink = `https://api.themoviedb.org/3/person/${params.get('id')}`;
 
-const data = await fetch(apiLink, options) //on récupère les données du film ou de la série
+const data = await fetch(apiLink+endApiLink, options) //on récupère les données du film ou de la série
     .then(res => res.json())
     .catch(err => console.error(err));
 
@@ -39,7 +39,7 @@ let gnm = document.querySelector("#gnm");
 
 let biographie = document.querySelector("#biographie");
 if (data.biography == ""){
-    biographie.innerHTML += "aucune biographie diponnible";
+    biographie.innerHTML += "Aucune biographie diponnible";
 }
 else{
     biographie.innerHTML += data.biography;
