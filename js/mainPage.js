@@ -142,6 +142,7 @@ async function research(toSearch){
   filterButtons[1].style.backgroundColor = white;
   listResultsMovies.style.display = "flex";
   listResultsTV.style.display = "none";
+  
   const urlMovies = `https://api.themoviedb.org/3/search/movie?query=${toSearch}`;
   const responseMovies = await fetch(urlMovies, {
     headers: {
