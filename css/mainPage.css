@@ -113,6 +113,10 @@ section{
     background-color: var(--gray);
 }
 
+#research_results{
+    background-color: var(--gray);
+}
+
 @media screen and (max-width:768px){
     section{
         .titleList{

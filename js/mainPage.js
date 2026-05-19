@@ -51,15 +51,45 @@ buttons.forEach(button => {
 let resultsSection = document.querySelector('#research_results')
 let search_input = document.querySelector('#search-input');
 let search_button = document.querySelector('#search-button');
+let filterButtons = resultsSection.querySelectorAll('button');
+let listResultsMovies = document.querySelector("#listResultsMovies");
+let listResultsTV = document.querySelector("#listResultsTV");
 resultsSection.style.display = "none";
 search_button.addEventListener('click', ()=>{
   if (search_input.value != ""){
-    resultsSection.style.display = "inline";
     research(search_input.value);
   }
   else{
     resultsSection.style.display = "none";
   }
+});
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    if (search_input.value != ""){
+    research(search_input.value);
+    }
+    else{
+    resultsSection.style.display = "none";
+    }
+  }
+});
+
+filterButtons[0].addEventListener('click', ()=>{
+  filterButtons[0].style.color = white;
+  filterButtons[0].style.backgroundColor = color;
+  filterButtons[1].style.color = color;
+  filterButtons[1].style.backgroundColor = white;
+  listResultsMovies.style.display = "flex";
+  listResultsTV.style.display = "none";
+});
+  
+filterButtons[1].addEventListener('click', ()=>{
+  filterButtons[1].style.color = white;
+  filterButtons[1].style.backgroundColor = color;
+  filterButtons[0].style.color = color;
+  filterButtons[0].style.backgroundColor = white;
+  listResultsMovies.style.display = "none";
+  listResultsTV.style.display = "flex";
 });
 
 async function fillList(apiLink, section){ //fonction qui remplit une liste de tendances avec les films/séries spécifiées par le lien prit en paramètre
@@ -90,6 +120,13 @@ async function fillList(apiLink, section){ //fonction qui remplit une liste de t
 }
 
 async function research(toSearch){
+  resultsSection.style.display = "block";
+  filterButtons[0].style.color = white;
+  filterButtons[0].style.backgroundColor = color;
+  filterButtons[1].style.color = color;
+  filterButtons[1].style.backgroundColor = white;
+  listResultsMovies.style.display = "flex";
+  listResultsTV.style.display = "none";
   const urlMovies = `https://api.themoviedb.org/3/search/movie?query=${toSearch}`;
   const responseMovies = await fetch(urlMovies, {
     headers: {
@@ -97,13 +134,10 @@ async function research(toSearch){
     }
   });
   let dataMovies = await responseMovies.json();
-  if (dataMovies.results.length > 12){
-    dataMovies.results.length = 12;
-  }
-  let listResultsMovies = document.querySelector("#listResultsMovies");
-  listResultsMovies.innerHTML = ""
+  console.log(dataMovies.results);
+  listResultsMovies.innerHTML = "";
   if (dataMovies.results.length == 0){
-    listResultsMovies.innerHTML = "Aucun réultat trouvé"
+    listResultsMovies.innerHTML = "Aucun réultat trouvé";
   }
   else{
     for (let i = 0; i < dataMovies.results.length; i++){
@@ -136,16 +170,13 @@ async function research(toSearch){
     }
   });
   let dataTV = await responseTV.json();
-  if (dataTV.results.length > 12){
-    dataTV.results.length = 12;
-  }
-  let listResultsTV = document.querySelector("#listResultsTV");
-  listResultsTV.innerHTML = ""
+  
+  listResultsTV.innerHTML = "";
   if (dataTV.results.length == 0){
-    listResultsTV.innerHTML = "Aucun réultat trouvé"
+    listResultsTV.innerHTML = "Aucun réultat trouvé";
   }
   else{
-    for (let i = 0; i < dataTV.results.length; i++){
+    for (let i = 0; i < dataTV.results.length ; i++){
       let posterPath = "";
       if (dataTV.results[i].poster_path == null){
         posterPath = "./poster.webp";
@@ -155,7 +186,7 @@ async function research(toSearch){
       }
       listResultsTV.innerHTML +=`
         <article>
-          <a href = "./movie.html?type=movie&id=${dataTV.results[i].id}">
+          <a href = "./movie.html?type=tv&id=${dataTV.results[i].id}">
             <img src = "${posterPath}" alt="Affiche" class = "poster">
             <div class = "divNote">
               <p class = "movieNote">${Math.round(dataTV.results[i].vote_average*10)}%</p>

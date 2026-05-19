@@ -40,5 +40,8 @@ function numberToMonth(nb){//fonction qui prend en entrée une chaine de caratè
 }
 
 function prettyDate(date){ //fonction qui change le format d'affichage des dates (année-mois-jour → jour mois année)
-  return `${date.slice(8,10)} ${numberToMonth(date.slice(5,7))} ${date.slice(0,4)}`;
+  if (date == ""){
+    return "date inconnue";
+  }
+    return `${date.slice(8,10)} ${numberToMonth(date.slice(5,7))} ${date.slice(0,4)}`;
 }
