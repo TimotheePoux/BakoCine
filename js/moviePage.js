@@ -72,7 +72,11 @@ if (dataCredits.cast.length == 0){
      list.innerHTML = `<p class = "zero_resultat">Aucun acteur recensé</p>` //Valeur par défaut si on ne trouve aucun acteur
 }
 else{
-    for (let i = 0; i < dataCredits.cast.length; i++){   //On affiche au maximum 8 acteurs
+    let limit = dataCredits.cast.length;
+    if (limit > 8){ //On affiche au maximum 8 acteurs
+        limit = 8;
+    }
+    for (let i = 0; i < limit; i++){ 
         let profilePath = "./media/poster.webp";
         if (dataCredits.cast[i].profile_path != null){
             profilePath = `https://image.tmdb.org/t/p/original${dataCredits.cast[i].profile_path}`;
