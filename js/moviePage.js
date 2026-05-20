@@ -1,12 +1,12 @@
-const params = new URLSearchParams(window.location.search);
+const params = new URLSearchParams(window.location.search); //On récupère les variables dans l'adresse
 
-const apiLink = `https://api.themoviedb.org/3/${params.get('type')}/${params.get('id')}`;
+const apiLink = `https://api.themoviedb.org/3/${params.get('type')}/${params.get('id')}`;   //On récupère les informations du film ou de la série grace aux variables récupérées au préalable
 
-const data = await fetch(apiLink+endApiLink, options) //on récupère les données du film ou de la série
+const data = await fetch(apiLink+endApiLink, options) //Pn récupère les données du film ou de la série
     .then(res => res.json())
     .catch(err => console.error(err));
 
-function convertRuntime(time){
+function convertRuntime(time){                 //Fonction qui prend en paramètre un nombre de minutes et qui renvoie une chaine de charactere avec le temps en heures et en minutes
     let runtime = `${(time - time%60)/60}h`;
     if (time%60 < 10){
         runtime += `0`
@@ -15,6 +15,7 @@ function convertRuntime(time){
     return runtime;
 }
 
+//On remplace les valeurs par défaut de la page par les informations fournies par l'API
 let presentation = document.querySelector("#presentation")
 presentation.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${data.backdrop_path})`;
 
@@ -32,6 +33,7 @@ let genres = "";
 data.genres.forEach(genre => {
     genres += `${genre.name}, `;
 });
+//Condition nécessaire car on ne va pas fournir les memes informations si on a un film ou une série
 if (params.get('type') == 'movie'){
     h2.innerHTML = `${data.title} (${data.release_date.slice(0,4)})`;
     dgd.innerHTML = `${prettyDate(data.release_date)}`;
@@ -55,22 +57,22 @@ else{
 
 let synopsis = document.querySelector("#synopsis");
 if (data.overview == ""){
-    synopsis.innerHTML += "aucun synopsis diponnible";
+    synopsis.innerHTML += "aucun synopsis diponnible";      //Valeur par défaut si on a pas de synopsis
 }
 else{
     synopsis.innerHTML += data.overview;
 }
 
 let list = document.querySelector(".list");
-const dataCredits = await fetch(`${apiLink}/credits${endApiLink}`, options) //on récupère les données des crédits du film ou de la série
+const dataCredits = await fetch(`${apiLink}/credits${endApiLink}`, options) //On récupère les données des crédits du film ou de la série
     .then(res => res.json())
     .catch(err => console.error(err));
 
 if (dataCredits.cast.length == 0){
-     list.innerHTML = `<p class = "zero_resultat">Aucun acteur recensé</p>`
+     list.innerHTML = `<p class = "zero_resultat">Aucun acteur recensé</p>` //Valeur par défaut si on ne trouve aucun acteur
 }
 else{
-    for (let i = 0; i < 8; i++){
+    for (let i = 0; i < dataCredits.cast.length; i++){   //On affiche au maximum 8 acteurs
         let profilePath = "./media/poster.webp";
         if (dataCredits.cast[i].profile_path != null){
             profilePath = `https://image.tmdb.org/t/p/original${dataCredits.cast[i].profile_path}`;

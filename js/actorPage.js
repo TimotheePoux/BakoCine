@@ -1,14 +1,14 @@
-const params = new URLSearchParams(window.location.search);
+const params = new URLSearchParams(window.location.search); //On récupère les variables dans l'adresse
 
-const apiLink = `https://api.themoviedb.org/3/person/${params.get('id')}`;
+const apiLink = `https://api.themoviedb.org/3/person/${params.get('id')}`;  //On récupère le lien de l'acteur à partir d'un id
 
-const data = await fetch(apiLink+endApiLink, options) //on récupère les données du film ou de la série
+const data = await fetch(apiLink+endApiLink, options)
     .then(res => res.json())
     .catch(err => console.error(err));
 
 ;
 
-function afficherGenre(genre){
+function afficherGenre(genre){ //Fonction qui prend en parametre un nombre et qui renvoie le genre associé
     switch(genre){
         case 1:
             return "Femme";
@@ -30,7 +30,7 @@ let h2 = document.querySelector("h2");
 let gnm = document.querySelector("#gnm");
     h2.innerHTML = `${data.name}`;
     gnm.innerHTML = afficherGenre(data.gender);
-    if (data.birthday != null){
+    if (data.birthday != null){                             //On rajoute les dates de naissance et de morts uniquement si on les a
         gnm.innerHTML += `, ${prettyDate(data.birthday)}`;
     }
     if (data.deathday != null){
@@ -39,7 +39,7 @@ let gnm = document.querySelector("#gnm");
 
 let biographie = document.querySelector("#biographie");
 if (data.biography == ""){
-    biographie.innerHTML += "Aucune biographie diponnible";
+    biographie.innerHTML += "Aucune biographie diponnible"; //Placeholder si on a pas de biographie
 }
 else{
     biographie.innerHTML += data.biography;

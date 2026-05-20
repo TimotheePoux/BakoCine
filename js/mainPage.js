@@ -1,8 +1,8 @@
 const apiLinkBase = 'https://api.themoviedb.org/3/'; //lien de l'api que l'on va agrémenter en fonction de ce que l'on veut chercher
 const white = "#ffffff"
 const color = "#032541"
-let buttons = [];
-let lists = [];
+let buttons = [];   //liste qui stocke les boutons de filtrage
+let lists = [];     //liste qui stocke les listes de films/séries/tendances
 lists[0] = document.querySelector('#tendances');
 buttons[0] = lists[0].querySelectorAll('button');
 lists[1] = document.querySelector('#tv');
@@ -10,24 +10,24 @@ buttons[1] = lists[1].querySelectorAll('button');
 lists[2] = document.querySelector('#films');
 buttons[2] = lists[2].querySelectorAll('button');
 
-const trending = await fetch(`${apiLinkBase}trending/all/day${endApiLink}`, options) //on récupère la liste des tendances
+const trending = await fetch(`${apiLinkBase}trending/all/day${endApiLink}`, options) //On récupère la liste des tendances
   .then(res => res.json())
   .catch(err => console.error(err));
 
 let search = document.querySelector('#search');
-search.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${trending.results[0].backdrop_path})`; //on met comme fond de la barre de recherche le film ou la série la plus en tendance du moment
+search.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${trending.results[0].backdrop_path})`; //On met comme fond de la barre de recherche le film ou la série la plus en tendance du moment
 
-//au chargement de la page, on remplit les 3 listes avec les reglages par défaut
+//Au chargement de la page, on remplit les 3 listes avec les reglages par défaut
 fillList(`${apiLinkBase}trending/all/day`, lists[0]);
 fillList(`${apiLinkBase}tv/top_rated`, lists[1]);
 fillList(`${apiLinkBase}movie/top_rated`, lists[2]);
 
 buttons.forEach(button => {
-  //au chargement de la page, on affiche le premier bouton activé
+  //Au chargement de la page, on affiche les premier bouton activés
   button[0].style.color = white;
   button[0].style.backgroundColor = color;
 
-  button[0].addEventListener('click', ()=>{
+  button[0].addEventListener('click', ()=>{    //Si on appuie sur un bouton, on lance la fonction fillList avec la value du bouton et on change leur apparence
     button[0].style.color = white;
     button[0].style.backgroundColor = color;
     button[1].style.color = color;
@@ -54,6 +54,7 @@ let listResultsMovies = document.querySelector("#listResultsMovies");
 let listResultsTV = document.querySelector("#listResultsTV");
 let listResultsPerson = document.querySelector("#listResultsPeople");
 resultsSection.style.display = "none";
+//Si on appuie sur la l'icone de loupe ou sur entrée, ça lance une recherche
 search_button.addEventListener('click', ()=>{
   if (search_input.value != ""){
     research(search_input.value);
@@ -73,6 +74,7 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
+//Fonctionnement des boutons de filtrage pour la recherche
 filterButtons[0].addEventListener('click', ()=>{
   filterButtons[0].style.color = white;
   filterButtons[0].style.backgroundColor = color;
@@ -109,20 +111,21 @@ filterButtons[2].addEventListener('click', ()=>{
   listResultsPerson.style.display = "flex";
 });
 
+//Lance une recherche au chargement de la page si la barre de recherche est déjà remplie
 if (search_input.value != ""){
   research(search_input.value);
 }
 
-async function fillList(apiLink, section){ //fonction qui remplit une liste de tendances avec les films/séries spécifiées par le lien prit en paramètre
-  const data = await fetch(apiLink+endApiLink, options) //récupère la liste des tendances grace au lien de l'api pris en paramètre
+async function fillList(apiLink, section){ //Fonction qui remplit une liste avec les films/séries spécifiées par le lien prit en paramètre
+  const data = await fetch(apiLink+endApiLink, options) //Récupère la liste grace au lien de l'api pris en paramètre
     .then(res => res.json())
     .catch(err => console.error(err));
   
   let list = section.querySelector(".list");
-  list.innerHTML = "";
+  list.innerHTML = "";      //On rénitialise ce que contient la liste
 
-  for (let i = 0; i<4; i++){
-    let posterPath = "./media/poster.webp";
+  for (let i = 0; i<4; i++){      //On met 4 articles par liste
+    let posterPath = "./media/poster.webp";   //Place holder si on n'a pas de poster à disposition
     if (data.results[i].poster_path != null){
       posterPath = `https://image.tmdb.org/t/p/original${data.results[i].poster_path}`;
     }
@@ -130,7 +133,7 @@ async function fillList(apiLink, section){ //fonction qui remplit une liste de t
     let titre = "";
     let date = "";
     let href = "";
-    //condition nécéssaire car l'api ne donne pas le même nom au titre et à la date en fonction de si on a un film ou une séries
+    //Condition nécéssaire car l'api ne donne pas le même nom au titre et à la date en fonction de si on a un film ou une séries
     if ("title" in data.results[i]){
       titre = data.results[i].title;
       date = prettyDate(data.results[i].release_date);
@@ -157,8 +160,9 @@ async function fillList(apiLink, section){ //fonction qui remplit une liste de t
   }
 }
 
-async function research(toSearch){
-  resultsSection.style.display = "block";
+async function research(toSearch){          //Fonction qui va afficher les résultats d'une recherche
+  resultsSection.style.display = "block";   //Affichage des résultats
+  //Les résultats son par défaut des films
   filterButtons[0].style.color = white;
   filterButtons[0].style.backgroundColor = color;
   filterButtons[1].style.color = color;
@@ -169,7 +173,7 @@ async function research(toSearch){
   listResultsTV.style.display = "none";
   listResultsPerson.style.display = "none";
   
-  const urlMovies = `https://api.themoviedb.org/3/search/movie${endApiLink}&query=${toSearch}`;
+  const urlMovies = `https://api.themoviedb.org/3/search/movie${endApiLink}&query=${toSearch}`;   //On récupère le lien correspondant à la recherche des films
   const responseMovies = await fetch(urlMovies, {
     headers: {
       "Authorization": `Bearer ${token}`
@@ -179,14 +183,15 @@ async function research(toSearch){
 
   listResultsMovies.innerHTML = "";
   if (dataMovies.results.length == 0){
-    listResultsMovies.innerHTML = `<p class = "zero_resultat">Aucun réultat trouvé</p>`;
+    listResultsMovies.innerHTML = `<p class = "zero_resultat">Aucun réultat trouvé</p>`;    //Si on obtient aucun résultat
   }
   else{
     for (let i = 0; i < dataMovies.results.length; i++){
-      let posterPath = "./media/poster.webp";
+      let posterPath = "./media/poster.webp";       //Placeholder si on a pas de poster à disposition
       if (dataMovies.results[i].poster_path != null){
         posterPath = `https://image.tmdb.org/t/p/original${dataMovies.results[i].poster_path}`;
       }
+      //Ajout d'un article contenant les valeurs fournies par l'API
       listResultsMovies.innerHTML +=`
         <article>
           <a href = "./movie.html?type=movie&id=${dataMovies.results[i].id}">
@@ -202,6 +207,7 @@ async function research(toSearch){
     }
   }
 
+  //Même logique mais pour les séries
   const urlTV = `https://api.themoviedb.org/3/search/tv${endApiLink}&query=${toSearch}`;
   const responseTV = await fetch(urlTV, {
     headers: {
@@ -235,6 +241,7 @@ async function research(toSearch){
     }
   }
 
+  //Même logique mais pour les acteurs
   const urlPerson = `https://api.themoviedb.org/3/search/person${endApiLink}&query=${toSearch}`;
   const responsePerson = await fetch(urlPerson, {
     headers: {
