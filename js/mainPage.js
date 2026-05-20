@@ -52,6 +52,7 @@ let search_button = document.querySelector('#search-button');
 let filterButtons = resultsSection.querySelectorAll('button');
 let listResultsMovies = document.querySelector("#listResultsMovies");
 let listResultsTV = document.querySelector("#listResultsTV");
+let listResultsPerson = document.querySelector("#listResultsPeople");
 resultsSection.style.display = "none";
 search_button.addEventListener('click', ()=>{
   if (search_input.value != ""){
@@ -77,17 +78,35 @@ filterButtons[0].addEventListener('click', ()=>{
   filterButtons[0].style.backgroundColor = color;
   filterButtons[1].style.color = color;
   filterButtons[1].style.backgroundColor = white;
+  filterButtons[2].style.color = color;
+  filterButtons[2].style.backgroundColor = white;
   listResultsMovies.style.display = "flex";
   listResultsTV.style.display = "none";
+  listResultsPerson.style.display = "none";
 });
   
 filterButtons[1].addEventListener('click', ()=>{
-  filterButtons[1].style.color = white;
-  filterButtons[1].style.backgroundColor = color;
   filterButtons[0].style.color = color;
   filterButtons[0].style.backgroundColor = white;
+  filterButtons[1].style.color = white;
+  filterButtons[1].style.backgroundColor = color;
+  filterButtons[2].style.color = color;
+  filterButtons[2].style.backgroundColor = white;
   listResultsMovies.style.display = "none";
   listResultsTV.style.display = "flex";
+  listResultsPerson.style.display = "none";
+});
+
+filterButtons[2].addEventListener('click', ()=>{
+  filterButtons[0].style.color = color;
+  filterButtons[0].style.backgroundColor = white;
+  filterButtons[1].style.color = color;
+  filterButtons[1].style.backgroundColor = white;
+  filterButtons[2].style.color = white;
+  filterButtons[2].style.backgroundColor = color
+  listResultsMovies.style.display = "none";
+  listResultsTV.style.display = "none";
+  listResultsPerson.style.display = "flex";
 });
 
 if (search_input.value != ""){
@@ -144,8 +163,11 @@ async function research(toSearch){
   filterButtons[0].style.backgroundColor = color;
   filterButtons[1].style.color = color;
   filterButtons[1].style.backgroundColor = white;
+  filterButtons[2].style.color = color;
+  filterButtons[2].style.backgroundColor = white;
   listResultsMovies.style.display = "flex";
   listResultsTV.style.display = "none";
+  listResultsPerson.style.display = "none";
   
   const urlMovies = `https://api.themoviedb.org/3/search/movie${endApiLink}&query=${toSearch}`;
   const responseMovies = await fetch(urlMovies, {
@@ -194,11 +216,8 @@ async function research(toSearch){
   }
   else{
     for (let i = 0; i < dataTV.results.length ; i++){
-      let posterPath = "";
-      if (dataTV.results[i].poster_path == null){
-        posterPath = "./media/poster.webp";
-      }
-      else{
+      let posterPath = "./media/poster.webp";
+      if (dataTV.results[i].poster_path != null){
         posterPath = `https://image.tmdb.org/t/p/original${dataTV.results[i].poster_path}`;
       }
       listResultsTV.innerHTML +=`
@@ -211,6 +230,35 @@ async function research(toSearch){
           </a>
           <p class = "movieTitle">${dataTV.results[i].name}</p>
           <p class = "movieDate">${prettyDate(dataTV.results[i].first_air_date)}</p>
+          </article>
+      `;
+    }
+  }
+
+  const urlPerson = `https://api.themoviedb.org/3/search/person${endApiLink}&query=${toSearch}`;
+  const responsePerson = await fetch(urlPerson, {
+    headers: {
+      "Authorization": `Bearer ${token}`
+    }
+  });
+  let dataPerson = await responsePerson.json();
+
+  listResultsPerson.innerHTML = "";
+  if (dataPerson.results.length == 0){
+    listResultsPerson.innerHTML = `<p class = "zero_resultat">Aucun réultat trouvé</p>`;
+  }
+  else{
+    for (let i = 0; i < dataPerson.results.length ; i++){
+      let portraitPath = "./media/poster.webp";
+      if (dataPerson.results[i].profile_path != null){
+        portraitPath = `https://image.tmdb.org/t/p/original${dataPerson.results[i].profile_path}`;
+      }
+      listResultsPerson.innerHTML +=`
+        <article>
+          <a href = "./actor.html?id=${dataPerson.results[i].id}">
+            <img src = "${portraitPath}" alt="Affiche" class = "poster">
+          </a>
+          <p class = "movieTitle">${dataPerson.results[i].name}</p>
           </article>
       `;
     }
